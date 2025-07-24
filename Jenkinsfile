@@ -2,14 +2,14 @@ pipeline {
     agent any
    
     stages {
-        stage('Create  directory for the WEB Application')
+        stage('Create directory for the WEB Application')
         {
             steps{
                
                 //Fisrt, drop the directory if exists
-                sh 'rm -rf /home/jenkins/tomcat-web'
+                sh 'rm -rf $(pwd)/tomcat-web'
                 //Create the directory
-                sh 'mkdir /home/jenkins/tomcat-web'
+                sh 'mkdir $(pwd)/tomcat-web'
                 
             }
         }
@@ -22,7 +22,7 @@ pipeline {
         stage('Create the Tomcat container') {
             steps {
             echo 'Creating the container...'
-            sh 'docker run -dit --name tomcat1 -p 9090:8080  -v /home/jenkins/tomcat-web:/usr/local/tomcat/webapps tomcat:9.0'
+            sh 'docker run -dit --name tomcat1 -p 9090:8080  -v $(pwd)/tomcat-web:/usr/local/tomcat/webapps tomcat:9.0'
             }
         }
         stage('Copy the web application to the container directory') {
