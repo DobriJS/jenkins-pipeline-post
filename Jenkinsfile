@@ -28,9 +28,9 @@ pipeline {
         stage('Copy the web application to the container directory') {
             steps {
                 echo 'Creating the shopping folder in the container'
-                sh 'mkdir /home/jenkins/tomcat-web/shopping'
+                sh 'mkdir $(pwd)/tomcat-web/shopping'
                 echo 'Copying web application...'             
-                sh 'cp -r shopping/* /home/jenkins/tomcat-web/shopping'
+                sh 'cp -r shopping/* $(pwd)/tomcat-web/shopping'
             }
         }
     }
